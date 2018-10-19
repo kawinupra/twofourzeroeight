@@ -43,7 +43,7 @@ namespace twozerofoureight
             switch (i)
             {
                 case 0:
-                    l.BackColor = Color.Gray;
+                    l.BackColor = Color.AntiqueWhite;
                     break;
                 case 2:
                     l.BackColor = Color.DarkGray;
@@ -54,9 +54,34 @@ namespace twozerofoureight
                 case 8:
                     l.BackColor = Color.Red;
                     break;
-                default:
+                case 16:
+                    l.BackColor = Color.DarkOrchid;
+                    break;
+                case 32:
+                   l.BackColor = Color.LightGreen;
+                    break;
+                case 64: 
+                  l.BackColor =Color.ForestGreen;
+                    break;
+                case  128:
+                    l.BackColor = Color.Yellow;
+                    break;
+                case 256:
+                    l.BackColor= Color.OrangeRed;
+                    break;
+                case 512:
+                    l.BackColor = Color.IndianRed;
+                    break;
+                case 1024:
+                    l.BackColor= Color.HotPink;
+                    break;
+                case 2048:
+                    l.BackColor =  Color.PaleVioletRed;
+                    break;
+                default :
                     l.BackColor = Color.Green;
                     break;
+
             }
         }
         private void UpdateBoard(int[,] board)
@@ -77,6 +102,13 @@ namespace twozerofoureight
             UpdateTile(lbl31, board[3, 1]);
             UpdateTile(lbl32, board[3, 2]);
             UpdateTile(lbl33, board[3, 3]);
+            //for score cal (sum of all lbl 0-to-33);
+            int score = 0;
+            foreach(int s in board)
+            {
+                score += s;
+            }
+            UpdateTile(lbl34,score);
         }
 
         private void btnLeft_Click(object sender, EventArgs e)
@@ -99,5 +131,31 @@ namespace twozerofoureight
             controller.ActionPerformed(TwoZeroFourEightController.DOWN);
         }
 
+
+
+
+
+        //for keyboard control
+        
+        private void keyboardControl(object sender , PreviewKeyDownEventArgs e)
+        {
+            
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    controller.ActionPerformed(TwoZeroFourEightController.LEFT);
+                    break;
+                case Keys.Right:
+                    controller.ActionPerformed(TwoZeroFourEightController.RIGHT);
+                    break;
+                case Keys.Up:
+                    controller.ActionPerformed(TwoZeroFourEightController.UP);
+                    break;
+                case Keys.Down:
+                    controller.ActionPerformed(TwoZeroFourEightController.DOWN);
+                    break;
+            }
+        }
+        
     }
 }
